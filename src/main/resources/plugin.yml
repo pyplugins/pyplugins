@@ -1,0 +1,11 @@
+name: PyPlugins
+main: com.dmytrohoi.pyplugins.PythonLoader
+author: hedgehoi
+website: http://pyplugins.dmytrohoi.com/
+version: 0.0.1
+commands:
+  pyplugins:
+    description: Load, unload or reload the specified python plugins.
+    usage: |
+      /<command> <action> [args]
+      Available actions: load, unload, reload

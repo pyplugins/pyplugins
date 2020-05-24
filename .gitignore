@@ -1,0 +1,12 @@
+*.pyc
+*.class
+# eclipse
+.classpath
+.pydevproject
+.project
+.settings/
+bin/
+target/
+lib/
+dependency-reduced-pom.xml
+MANIFEST.MF
