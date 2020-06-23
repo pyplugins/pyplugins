@@ -12,6 +12,9 @@ PyPlugins - Python Plugin Loader
 [![bStats Players](https://img.shields.io/bstats/players/7627)](https://bstats.org/plugin/bukkit/PyPlugins/7627)
 [![bStats Servers](https://img.shields.io/bstats/servers/7627)](https://bstats.org/plugin/bukkit/PyPlugins/7627)
 
+<p align="center">
+<img src="https://www.spigotmc.org/attachments/new-project-png.518201/">
+</p>
 
 PyPlugins - is a plugins loader for Bukkit/Spigot (PaperMC) to load
 plugins are written on Python 2.7 (via Jython 2.7.2).
