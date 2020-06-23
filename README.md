@@ -6,11 +6,11 @@ PyPlugins - Python Plugin Loader
 [![GitHub Release Date](https://img.shields.io/github/release-date/pyplugins/pyplugins)](https://github.com/pyplugins/pyplugins/releases)
 [![GitHub All Releases](https://img.shields.io/github/downloads/pyplugins/pyplugins/total)](https://github.com/pyplugins/pyplugins/releases)
 [![Spigot](https://img.shields.io/badge/spigot-1.15.2-orange)](https://www.spigotmc.org/resources/pyplugins.79244/)
-![Spiget Downloads](https://img.shields.io/spiget/downloads/79244)
-![Spiget Stars](https://img.shields.io/spiget/rating/79244)
-![Spiget tested server versions](https://img.shields.io/spiget/tested-versions/79244)
-![bStats Players](https://img.shields.io/bstats/players/7627)
-![bStats Servers](https://img.shields.io/bstats/servers/7627)
+[![Spiget Downloads](https://img.shields.io/spiget/downloads/79244)](https://www.spigotmc.org/resources/pyplugins.79244/)
+[![Spiget Stars](https://img.shields.io/spiget/rating/79244)](https://www.spigotmc.org/resources/pyplugins.79244/)
+[![Spiget tested server versions](https://img.shields.io/spiget/tested-versions/79244)](https://www.spigotmc.org/resources/pyplugins.79244/)
+[![bStats Players](https://img.shields.io/bstats/players/7627)](https://bstats.org/plugin/bukkit/PyPlugins/7627)
+[![bStats Servers](https://img.shields.io/bstats/servers/7627)](https://bstats.org/plugin/bukkit/PyPlugins/7627)
 
 
 PyPlugins - is a plugins loader for Bukkit/Spigot (PaperMC) to load
