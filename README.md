@@ -154,6 +154,9 @@ Donate
 
 Follow **Sponsor** button on GitHub page.
 
+![Statistics](https://bstats.org/signatures/bukkit/PyPlugins.svg)
+
+
 -------
 
 Author: @dmytrohoi
