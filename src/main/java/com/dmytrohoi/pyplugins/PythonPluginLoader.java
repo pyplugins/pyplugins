@@ -50,6 +50,7 @@ public class PythonPluginLoader implements PluginLoader {
      * Filter - matches all of the following, for the regex illiterate:
      *
      * For directories:
+     *
      * <pre>
      * plugin_pyplugin
      * plugin.pyplugin
@@ -60,12 +61,9 @@ public class PythonPluginLoader implements PluginLoader {
      * plugin.pyplugin
      * </pre>
      */
-    public static final Pattern[] fileFilters = new Pattern[] {
-            Pattern.compile("^(.*)\\.pyplugin$"),
-            Pattern.compile("^(.*)_pyplugin$"),
-            Pattern.compile("^(.*)\\.pyplugin\\.zip$"),
-            Pattern.compile("^(.*)_pyplugin\\.zip$"),
-    };
+    public static final Pattern[] fileFilters = new Pattern[] { Pattern.compile("^(.*)\\.pyplugin$"),
+            Pattern.compile("^(.*)_pyplugin$"), Pattern.compile("^(.*)\\.pyplugin\\.zip$"),
+            Pattern.compile("^(.*)_pyplugin\\.zip$"), };
 
     private HashSet<String> loadedplugins = new HashSet<String>();
 
@@ -76,12 +74,12 @@ public class PythonPluginLoader implements PluginLoader {
         this.server = server;
     }
 
-    public Plugin loadPlugin(File file) throws InvalidPluginException/*, UnknownDependencyException*/ {
+    public Plugin loadPlugin(File file) throws InvalidPluginException/* , UnknownDependencyException */ {
         return loadPlugin(file, false);
     }
 
     public Plugin loadPlugin(File file, boolean ignoreSoftDependencies)
-            throws InvalidPluginException/*, InvalidDescriptionException, UnknownDependencyException*/ {
+            throws InvalidPluginException/* , InvalidDescriptionException, UnknownDependencyException */ {
 
         if (!file.exists()) {
             throw new InvalidPluginException(new FileNotFoundException(file.getPath() + " does not exist"));
@@ -92,7 +90,8 @@ public class PythonPluginLoader implements PluginLoader {
         String file_name = file.getName();
         if ((file.getName().endsWith(".pyplugin") || file.getName().endsWith("_pyplugin")) && file.isDirectory()) {
             data = new PluginPythonDirectory(file);
-        } else if ((file.getName().endsWith(".pyplugin") || file.getName().endsWith(".pyplugin.zip") || file.getName().endsWith("_pyplugin.zip")) && !file.isDirectory())  {
+        } else if ((file.getName().endsWith(".pyplugin") || file.getName().endsWith(".pyplugin.zip")
+                || file.getName().endsWith("_pyplugin.zip")) && !file.isDirectory()) {
             data = new PluginPythonZip(file);
         }
 
@@ -112,7 +111,7 @@ public class PythonPluginLoader implements PluginLoader {
         String new_value;
 
         if (pythonPathProp == null) {
-            new_value  = file_path;
+            new_value = file_path;
         } else {
             new_value = pythonPathProp + java.io.File.pathSeparator + file_path + java.io.File.pathSeparator;
         }
@@ -121,15 +120,16 @@ public class PythonPluginLoader implements PluginLoader {
         return props;
     }
 
-    private Plugin loadPlugin(File file, boolean ignoreSoftDependencies, PluginDataFile data) throws InvalidPluginException/*, InvalidDescriptionException, UnknownDependencyException*/ {
+    private Plugin loadPlugin(File file, boolean ignoreSoftDependencies, PluginDataFile data)
+            throws InvalidPluginException/* , InvalidDescriptionException, UnknownDependencyException */ {
         Properties props;
-    	System.out.println("[PyPlugins] Loading Plugin " + file.getName());
+        System.out.println("[PyPlugins] Loading Plugin " + file.getName());
         PythonPlugin result = null;
         PluginDescriptionFile description = null;
 
         try {
             InputStream stream = data.getStream("plugin.yml");
-            if (stream == null){
+            if (stream == null) {
                 throw new InvalidPluginException(new Exception("You must include plugin.yml!"));
             }
             description = new PluginDescriptionFile(stream);
@@ -146,17 +146,15 @@ public class PythonPluginLoader implements PluginLoader {
         File dataFolder = new File(file.getParentFile(), description.getName());
 
         if (dataFolder.getAbsolutePath().equals(file.getAbsolutePath())) {
-            throw new InvalidPluginException(new Exception(String.format("Projected datafolder: '%s' for %s is the same file as the plugin itself (%s)",
-                    dataFolder,
-                    description.getName(),
-                    file)));
+            throw new InvalidPluginException(new Exception(
+                    String.format("Projected datafolder: '%s' for %s is the same file as the plugin itself (%s)",
+                            dataFolder, description.getName(), file)));
         }
 
         if (dataFolder.exists() && !dataFolder.isDirectory()) {
-            throw new InvalidPluginException(new Exception(String.format("Projected datafolder: '%s' for %s (%s) exists and is not a directory",
-                    dataFolder,
-                    description.getName(),
-                    file)));
+            throw new InvalidPluginException(
+                    new Exception(String.format("Projected datafolder: '%s' for %s (%s) exists and is not a directory",
+                            dataFolder, description.getName(), file)));
         }
 
         List<String> depend;
@@ -182,11 +180,11 @@ public class PythonPluginLoader implements PluginLoader {
         state.initialize(System.getProperties(), props, null);
         PyList pythonpath = state.path;
         PyString filepath = new PyString(file.getAbsolutePath());
-    	pythonpath.append(filepath);
+        pythonpath.append(filepath);
 
         List<String> mainfile_names = Arrays.asList("plugin.py", "main.py", "__main__.py", "__init__.py");
         InputStream instream = null;
-        for (String mainfile_name : mainfile_names){
+        for (String mainfile_name : mainfile_names) {
             try {
                 instream = data.getStream(mainfile_name);
                 if (instream == null) {
@@ -199,19 +197,24 @@ public class PythonPluginLoader implements PluginLoader {
         }
 
         if (instream == null) {
-            throw new InvalidPluginException(new FileNotFoundException("Can not find: " + String.join(", ", mainfile_names) + "."));
+            throw new InvalidPluginException(
+                new FileNotFoundException(
+                    "Can not find: " + String.join(", ", mainfile_names) + "."
+                )
+            );
         }
 
         try {
             PyDictionary table = new PyDictionary();
             PythonInterpreter interp = new PythonInterpreter(table, state);
 
-            String[] before_plugin_scripts = {"__before__.py"};
-            String[] after_plugin_scripts = {"__after__.py"};
+            String[] before_plugin_scripts = {
+                "load.py", "command.py", "listener.py", "command_executor.py",
+                "event_handler.py", "configuration.py", "plugin.py"};
 
             // Run scripts designed to be run before plugin creation
             for (String script : before_plugin_scripts) {
-	            InputStream metastream = this.getClass().getClassLoader().getResourceAsStream("python/" + script);
+	            InputStream metastream = this.getClass().getClassLoader().getResourceAsStream("framework/" + script);
 	            interp.execfile(metastream);
 	            metastream.close();
             }
@@ -224,7 +227,7 @@ public class PythonPluginLoader implements PluginLoader {
             if (pyClass == null) {
                 pyClass = interp.get("Plugin");
                 if (pyClass == null) {
-                    throw new InvalidPluginException(new Exception("Can not find Mainclass."));
+                    throw new InvalidPluginException(new Exception("Can not find Main class."));
                 }
             } else {
                 result = (PythonPlugin) pyClass.__call__().__tojava__(PythonPlugin.class);
@@ -232,13 +235,6 @@ public class PythonPluginLoader implements PluginLoader {
             interp.set("PYPLUGIN", result);
 
             result.interp = interp;
-
-            // Run scripts designed to be run after plugin creation
-            for (String script : after_plugin_scripts) {
-	            InputStream metastream = this.getClass().getClassLoader().getResourceAsStream("python/" + script);
-	            interp.execfile(metastream);
-	            metastream.close();
-            }
 
             result.initialize(this, server, description, dataFolder, file);
             result.setDataFile(data);
@@ -279,8 +275,8 @@ public class PythonPluginLoader implements PluginLoader {
             try {
                 pyPlugin.setEnabled(false);
             } catch (Throwable ex) {
-                server.getLogger().log(Level.SEVERE, "Error occurred while disabling " + plugin.getDescription().getFullName()
-                                + " (Is it up to date?): " + ex.getMessage(), ex);
+                server.getLogger().log(Level.SEVERE, "Error occurred while disabling "
+                        + plugin.getDescription().getFullName() + " (Is it up to date?): " + ex.getMessage(), ex);
             }
 
             server.getPluginManager().callEvent(new PluginDisableEvent(plugin));
@@ -307,8 +303,8 @@ public class PythonPluginLoader implements PluginLoader {
             try {
                 pyPlugin.setEnabled(true);
             } catch (Throwable ex) {
-                server.getLogger().log(Level.SEVERE, "Error occurred while enabling " + plugin.getDescription().getFullName()
-                                + " (Is it up to date?): " + ex.getMessage(), ex);
+                server.getLogger().log(Level.SEVERE, "Error occurred while enabling "
+                        + plugin.getDescription().getFullName() + " (Is it up to date?): " + ex.getMessage(), ex);
             }
 
             // Perhaps abort here, rather than continue going, but as it stands,
@@ -318,22 +314,23 @@ public class PythonPluginLoader implements PluginLoader {
     }
 
     @Override
-    public Map<Class<? extends Event>, Set<RegisteredListener>> createRegisteredListeners(Listener listener, Plugin plugin) {
+    public Map<Class<? extends Event>, Set<RegisteredListener>> createRegisteredListeners(Listener listener,
+            Plugin plugin) {
         boolean useTimings = server.getPluginManager().useTimings();
         Map<Class<? extends Event>, Set<RegisteredListener>> ret = new HashMap<Class<? extends Event>, Set<RegisteredListener>>();
-        PythonListener pyListener = (PythonListener)listener;
+        PythonListener pyListener = (PythonListener) listener;
 
-        for(Map.Entry<Class<? extends Event>, Set<PythonEventHandler>> entry : pyListener.handlers.entrySet()) {
+        for (Map.Entry<Class<? extends Event>, Set<PythonEventHandler>> entry : pyListener.handlers.entrySet()) {
             Set<RegisteredListener> eventSet = new HashSet<RegisteredListener>();
 
-            for(final PythonEventHandler handler : entry.getValue()) {
+            for (final PythonEventHandler handler : entry.getValue()) {
                 EventExecutor executor = new EventExecutor() {
                     @Override
                     public void execute(Listener listener, Event event) throws EventException {
-                        ((PythonListener)listener).fireEvent(event, handler);
+                        ((PythonListener) listener).fireEvent(event, handler);
                     }
                 };
-                if(useTimings) {
+                if (useTimings) {
                     eventSet.add(new TimedRegisteredListener(pyListener, executor, handler.priority, plugin, false));
                 } else {
                     eventSet.add(new RegisteredListener(pyListener, executor, handler.priority, plugin, false));
@@ -351,11 +348,11 @@ public class PythonPluginLoader implements PluginLoader {
         InputStream stream = null;
         PluginDataFile data = null;
 
-
         String file_name = file.getName();
         if ((file.getName().endsWith(".pyplugin") || file.getName().endsWith("_pyplugin")) && file.isDirectory()) {
             data = new PluginPythonDirectory(file);
-        } else if ((file.getName().endsWith(".pyplugin") || file.getName().endsWith(".pyplugin.zip") || file.getName().endsWith("_pyplugin.zip")) && !file.isDirectory())  {
+        } else if ((file.getName().endsWith(".pyplugin") || file.getName().endsWith(".pyplugin.zip")
+                || file.getName().endsWith("_pyplugin.zip")) && !file.isDirectory()) {
             try {
                 data = new PluginPythonZip(file);
             } catch (InvalidPluginException ex) {
@@ -365,17 +362,19 @@ public class PythonPluginLoader implements PluginLoader {
 
         try {
             stream = data.getStream("plugin.yml");
-            if(stream == null) {
-                throw new InvalidDescriptionException(new InvalidPluginException(new FileNotFoundException("Plugin does not contain plugin.yml")));
+            if (stream == null) {
+                throw new InvalidDescriptionException(
+                        new InvalidPluginException(new FileNotFoundException("Plugin does not contain plugin.yml")));
             }
             return new PluginDescriptionFile(stream);
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            if(stream != null) {
+            if (stream != null) {
                 try {
                     stream.close();
-                } catch (IOException e) {}
+                } catch (IOException e) {
+                }
             }
         }
         return null;

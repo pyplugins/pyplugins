@@ -131,10 +131,12 @@ Handlers are available to easily create your Python plugin:
 - **PythonCommandExecutor class** (CommandsAPI)
 
     You can inherit your own `PluginNameCommandExecutor` class from `PythonCommandExecutor` to make handlers for "executeCommand" and "onTabComplete" actions (the command must be declared in `plugin.yml`).  Just create methods for these actions and make the `commands` attribute of your `PluginNameCommandExecutor` class with instances of `PyCommand` class (with command and methods names).
+    Also can be used as commands list acceptor (functional approach) and able to get `PyCommand`s as first argument on initialization.
 
 - **PythonListener class** (EventsAPI)
 
     Similar to CommandsAPI, but with `PythonListener` class as parent, the `listeners` attribute (for save your handlers) of class with instances of `PyEventHandler` (requires name of method to execute, Bukkit event object and (optional) Bukkit ptiority object).
+    Also can be used as listener list acceptor (functional approach) and able to get `PyEventHandler`s as first argument on initialization.
 
 [And more! Read..](https://github.com/pyplugins/pyplugins/wiki/pyplugins-framework)
 
@@ -156,6 +158,18 @@ Follow **Sponsor** button on GitHub page.
 
 ![Statistics](https://bstats.org/signatures/bukkit/PyPlugins.svg)
 
+Development
+============
+
+**NOTE:**
+
+[bStats](https://github.com/Bastian/bStats-Metrics) version 2.x.x does not allow the use of the `org.bukkit.plugin.Plugin` class for plugins and requires `org.bukkit.plugin.java.JavaPlugin`.
+
+PyPlugins currently uses bStats 1.8, and needs to be added from the local jar:
+
+``` bash
+mvn install:install-file -Dfile=bstats-bukkit-1.8.jar -DgroupId=org.bstats -DartifactId=bstats-bukkit -Dversion=1.8 -Dpackaging=jar
+```
 
 -------
 

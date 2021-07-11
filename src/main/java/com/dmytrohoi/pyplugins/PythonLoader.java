@@ -39,12 +39,13 @@ import org.bstats.bukkit.Metrics;
 public class PythonLoader extends JavaPlugin {
 
 	protected PluginManager pm;
+    private Metrics metrics;
 
     @Override
     public void onEnable() {
         // Add bStats metrics
         int pluginId = 7627;
-        Metrics metrics = new Metrics(this, pluginId);
+        metrics = new Metrics(this, pluginId);
     }
 
     public void onDisable() {}

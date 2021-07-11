@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.dmytrohoi</groupId>
     <artifactId>PyPlugins</artifactId>
-    <version>0.0.1</version>
+    <version>0.1.0</version>
     <packaging>pom</packaging>
 
     <name>PyPlugins</name>
@@ -16,7 +16,7 @@
             <id>dmytrohoi</id>
             <name>Dmytro Hoi</name>
             <email>code@dmytrohoi.com</email>
-            <url>https://dmytrohoi.com/</url>
+            <url>https://hoid.dev/</url>
             <roles>
                 <role>architect</role>
                 <role>developer</role>
@@ -34,9 +34,10 @@
     </licenses>
 
     <properties>
+        <java.version>1.16</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.7</maven.compiler.source>
-        <maven.compiler.target>1.7</maven.compiler.target>
+        <maven.compiler.source>16</maven.compiler.source>
+        <maven.compiler.target>16</maven.compiler.target>
     </properties>
 
     <modules>  <!-- child modules to be executed as part of this build -->
@@ -45,16 +46,17 @@
     </modules>
 
     <repositories>
-        <repository>
+        <!-- <repository>
             <id>spigot-repo</id>
             <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
-        </repository>
+        </repository> -->
+        <!-- Used for org.bukkit - https://docs.codemc.io/faq/-->
         <repository>
-            <id>CodeMC</id>
-            <url>https://repo.codemc.org/repository/maven-public</url>
+            <id>nms-repo</id>
+            <url>https://repo.codemc.io/repository/nms/</url>
         </repository>
     </repositories>
-    
+
     <distributionManagement>
        <repository>
            <id>github</id>
@@ -62,12 +64,19 @@
            <url>https://maven.pkg.github.com/pyplugins/pyplugins</url>
        </repository>
     </distributionManagement>
-    
+
     <dependencies>
         <dependency>
             <groupId>org.bukkit</groupId>
             <artifactId>bukkit</artifactId>
-            <version>1.15.2-R0.1-SNAPSHOT</version>
+            <version>1.17-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.spigotmc</groupId>
+            <artifactId>spigot</artifactId>
+            <version>1.17-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
 
@@ -79,13 +88,21 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.bstats/bstats-bukkit -->
         <dependency>
             <groupId>org.bstats</groupId>
             <artifactId>bstats-bukkit</artifactId>
-            <version>1.7</version>
+            <version>1.8</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>apache.snapshots</id>
+            <url>https://repository.apache.org/snapshots/</url>
+        </pluginRepository>
+    </pluginRepositories>
 
     <build>
         <sourceDirectory>${project.basedir}/../src/main/java</sourceDirectory>

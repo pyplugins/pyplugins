@@ -2,7 +2,7 @@ name: PyPlugins
 main: com.dmytrohoi.pyplugins.PythonLoader
 author: hedgehoi
 website: http://pyplugins.dmytrohoi.com/
-version: 0.0.1
+version: 0.1.0
 commands:
   pyplugins:
     description: Load, unload or reload the specified python plugins.
