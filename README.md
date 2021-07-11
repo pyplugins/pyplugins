@@ -13,7 +13,7 @@ PyPlugins - Python Plugin Loader
 [![bStats Servers](https://img.shields.io/bstats/servers/7627)](https://bstats.org/plugin/bukkit/PyPlugins/7627)
 
 <p align="center">
-<img src="https://www.spigotmc.org/attachments/new-project-png.518201/">
+<img src="./docs/img/logo.png">
 </p>
 
 PyPlugins - is a plugins loader for Bukkit/Spigot (PaperMC) to load
