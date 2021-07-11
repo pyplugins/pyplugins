@@ -33,7 +33,7 @@ Available two versions of the loader plugin:
  - without Jython (requires inclusion of `jython.jar` in the folder `server/lib/`)
 
 Steps:
-1. Put `PyPlugins-with[out]-Jython-*.*.*.jar` ([download link](https://pyplugins.github.io/download)) in your `server/plugins/` directory
+1. Put `PyPlugins-with[out]-Jython-*.*.*.jar` ([download link](https://github.com/pyplugins/pyplugins/releases)) in your `server/plugins/` directory
 2. Run server
 
 ### Python plugins install
