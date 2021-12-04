@@ -13,7 +13,7 @@ PyPlugins - Python Plugin Loader
 [![bStats Servers](https://img.shields.io/bstats/servers/7627)](https://bstats.org/plugin/bukkit/PyPlugins/7627)
 
 <p align="center">
-<img src="./docs/img/logo.png">
+<img alt="PyPlugins Logo" src="./docs/img/logo.png">
 </p>
 
 PyPlugins - is a plugins loader for Bukkit/Spigot (PaperMC) to load
@@ -22,7 +22,7 @@ plugins are written on Python 2.7 (via Jython 2.7.2).
 The creation of the plugin was inspired by [Macuyiko/minecraft-python](https://github.com/Macuyiko/minecraft-python), [masteroftime/Python-Plugin-Loader](https://github.com/masteroftime/Python-Plugin-Loader) and [cyberlis/pploader](https://github.com/cyberlis/pploader).
 
 
-## Installation
+Installation
 -----------------------
 
 ### PyPlugins (loader)
@@ -36,7 +36,8 @@ Steps:
 1. Put `PyPlugins-with[out]-Jython-*.*.*.jar` ([download link](https://github.com/pyplugins/pyplugins/releases)) in your `server/plugins/` directory
 2. Run server
 
-### Python plugins install
+
+Python plugins install
 *************
 
 1. Put the `<PluginName>.pyplugin` sources (directory or zip file) in your `server/plugins/` directory
@@ -48,20 +49,20 @@ Create plugin on Python
 
 The PyPlugins contains a few way to create plugin for Spigot on Python.
 
-It's can be:
+It can be:
  1. Clear Java-like approach (just write the code as a Java plugin, but using Python);
- 2. Using internal pyplugins-framework (recomended);
+ 2. Using internal pyplugins-framework (recommended);
 
 First approach examples you can see [here](https://www.spigotmc.org/wiki/spigot-plugin-development/).
 
-The next paragrphes about internal pyplugins-framework.
+The next paragraphs about internal pyplugins-framework.
 
 ## Plugin sources
 
 Your plugin can use the following paths to the plugin source code:
 
-- A zip whos name ends in either `.pyplugin.zip`, `_pyplugin.zip` or just `.pyplugin`
-- A directory whose name ends in `.pyplugin` or `_pyplugin` (actual for windows users)
+- A zip whose name ends in either `.pyplugin.zip`, `_pyplugin.zip` or just `.pyplugin`
+- A directory whose name ends in `.pyplugin` or `_pyplugin` (actual for Windows users)
 
 Zips with the `.pyplugin` extension are recommended if you release any plugins. When
 you use a zip, your must specify your own metadata; it will not allow guessed
@@ -84,8 +85,9 @@ The 'main' field of plugin metadata has special behavior:
 in bukkit, and should be used for all plugins that you release. plugin.yml is
 used in all java plugins (as it is the only option for java plugins). as such,
 opening up java plugin jars is a good way to learn what can go in it.
-Or you can read about it here http://wiki.bukkit.org/Plugin_YAML
-Here isan example of plugin.yml:
+Or you can read about it here http://wiki.bukkit.org/Plugin_YAML.
+
+Here is an example of plugin.yml:
 
     name: SamplePlugin
     main: SampleClass
@@ -105,7 +107,7 @@ Summary of fields:
 - "website" - mainly for people reading the code
 
 
-## Clear Java-like approach
+Clear Java-like approach
 ---------------------------
 
 Minimum requirements:
@@ -114,10 +116,10 @@ Minimum requirements:
 import it, because it is auto imported on startup of loader plugin).
 - Your main class must have onEnable() and onDisable() methods.
 
-[Code example and learn more..](https://github.com/pyplugins/pyplugins/wiki/Java-like-approach)
+[Code example and learn more...](https://github.com/pyplugins/pyplugins/wiki/Java-like-approach)
 
 
-## The pyplugins-framework approach
+The pyplugins-framework approach
 ---------------------------
 
 The same as Java-like minimum requirements:
@@ -138,7 +140,7 @@ Handlers are available to easily create your Python plugin:
     Similar to CommandsAPI, but with `PythonListener` class as parent, the `listeners` attribute (for save your handlers) of class with instances of `PyEventHandler` (requires name of method to execute, Bukkit event object and (optional) Bukkit ptiority object).
     Also can be used as listener list acceptor (functional approach) and able to get `PyEventHandler`s as first argument on initialization.
 
-[And more! Read..](https://github.com/pyplugins/pyplugins/wiki/pyplugins-framework)
+[And more! Read...](https://github.com/pyplugins/pyplugins/wiki/pyplugins-framework)
 
 Links
 ============
@@ -173,4 +175,4 @@ mvn install:install-file -Dfile=bstats-bukkit-1.8.jar -DgroupId=org.bstats -Dart
 
 -------
 
-Author: @dmytrohoi
+_(c) 2020-2021 @dmytrohoi | MIT License_

@@ -8,7 +8,9 @@
 bin/
 target/
 lib/
+
 dependency-reduced-pom.xml
 MANIFEST.MF
-# vscode
-.vscode
+# IDEs
+.vscode/
+.idea/

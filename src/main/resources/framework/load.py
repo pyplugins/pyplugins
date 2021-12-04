@@ -7,7 +7,7 @@ Author: hedgehoi (Dmytro Hoi)
 License: GNU License
 
 """
-# Standart Python import
+# Standard Python import
 import sys
 from os.path import abspath, sep
 
@@ -21,11 +21,11 @@ codecs.setDefaultEncoding('utf-8')
 from org.bukkit import Bukkit
 
 # =========================================================================== #
-# Redirect all standart stdout functions to Java.logging
+# Redirect all standard stdout functions to Java.logging
 # 1) Declare new stdout
 class DebugPrintStdoutRedirect(object):
     """
-    Redirect all standart stdout functions to default server logger with
+    Redirect all standard stdout functions to default server logger with
     prefix '[PyPlugins] [PRINT]:'.
 
     """
