@@ -3,6 +3,9 @@ main: com.dmytrohoi.pyplugins.PythonLoader
 author: hedgehoi
 website: http://pyplugins.dmytrohoi.com/
 version: 0.1.0
+libraries:
+  - org.python:jython-standalone:2.7.2
+
 commands:
   pyplugins:
     description: Load, unload or reload the specified python plugins.
