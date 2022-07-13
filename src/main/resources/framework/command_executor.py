@@ -78,7 +78,7 @@ class PythonCommandExecutor(CommandExecutor_, TabCompleter_):
         if isfunction(command_.executor):
             return command_.executor(sender, command, label, args)
 
-        executor = getattr(self, command_.executer)
+        executor = getattr(self, command_.executor)
         return executor(sender, command, label, args)
 
     def onTabComplete(self, sender, command, alias, args):
