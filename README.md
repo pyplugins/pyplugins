@@ -1,3 +1,6 @@
+WARNING! This repository has been archived and will not be maintained AND/OR updated for new versions of Spigot. The main reason is that Jython still does not support the Python 3 version. Another reason: the plugin was implemented (literally constructed, original authors and projects was mentioned in this file and saved as authors in code) from several unsupported plugins at the time of the release of Minecraft version 1.15 for use on a single public server and was used as a minimalistic/pythonic way to integrate plugins, written in Python, in Minecraft. I never fully considered myself the author of this code, for those who want to continue it - the minimum requirement for updating to a new version may be to add the correct dependencies to the pom file.
+====================
+
 PyPlugins - Python Plugin Loader
 ====================
 
